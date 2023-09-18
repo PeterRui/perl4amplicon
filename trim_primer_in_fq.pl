@@ -8,10 +8,10 @@ This script is used to search primers in fastq files. Bases outside them (e.g., 
 Usage: perl trim_primer_in_fq.pl -i [fastq files] -l [the primer list] -d [the output directory] <optional parameters>
 
 Parameters: 
--i the input fastq files (e.g., -i "raw/*.fastq", or -i raw/1.fq)
--l the primer list file
+-i the input files in fastq format (e.g., -i "raw/*.fastq", or -i raw/1.fq)
+-l a text file including primers
 -d the output directory, which should be different from the input directory.
--r remove primers? (default 0)
+-r remove primers? (default 1)
 	0 - No, only remove the bases outside them;
 	1 - Yes, remove both the primers and the bases outside them.
 -s keep reads which include one primer? (default 0)
@@ -21,7 +21,7 @@ Parameters:
 	0 - No;
 	1 - Yes.
 
-Example of the list file include 2 primers:
+Example of the text file including 2 primers:
 GMRCCIGGIGTIGGYTGYGC	nifH-2F
 TTGTTGGCIGCRTASAKIGCCAT	nifH-3R
 
@@ -37,10 +37,11 @@ getopts("i:l:d:r:s:c:",\%opts);
 my $inputs= $opts{i};
 my $list  = $opts{l};
 my $dout  = $opts{d};
-my $rmPrm = $opts{r};
+my $rmPrm = $opts{r}; $rmPrm=1 unless defined($rmPrm);
 my $onePrm= $opts{s};
 my $cmr   = $opts{c}; $cmr=1 unless defined($cmr);
 print "Copyright: Junpeng Rui, Lanzhou University. peter_rjp\@163.com\n";
+print "Please cite this article:\nRui J, Zhao Y, Cong N, Wang F, Li C, Liu X, Hu J, Ling N and Jing X (2023) Elevational distribution and seasonal dynamics of alpine soil prokaryotic communities. Front. Microbiol. 14:1280011. doi: 10.3389/fmicb.2023.1280011\n\n";
 die Usage() unless ($opts{i} and $opts{l} and $opts{d});
 mkpath($dout);
 my ($li,$id,$rc,@f,@cp,@rp,@lp);
@@ -53,8 +54,8 @@ if ($inputs=~ /\*/) {  # wildcard mode
 }
 print "@myfile\n";
 
-# ===== read the list =====
-open TMP, $list || die "Cannot open the list [$list]\n";
+# ===== read the text file including primers =====
+open TMP, $list || die "Cannot open the text file [$list]\n";
 while ($li=<TMP>) {
 	$li=~s/[\r\n]//g;
 	@f=split/\t/,$li;

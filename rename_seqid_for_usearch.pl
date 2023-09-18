@@ -2,7 +2,7 @@
 
 sub usage(){
 <<EOF
-This script is used to rename sequence IDs in fasta/fastq files, and add ";barcodelabel=<File name>;" after the IDs, which could be identified by USEARCH. 
+This script is used to rename sequence IDs in fasta/fastq-format files, and add ";barcodelabel=<File name>;" after the IDs, which could be identified by both USEARCH and Qiime. 
 For example, the first ID in "S1.fasta" will named as "S1_1;barcodelabel=S1;", and the second ID will be "S1_2;barcodelabel=S1;".
 
 Parameters: 
@@ -24,6 +24,7 @@ my $suff  = $opts{s};
 my $dout  = $opts{d}; $dout = "rename" unless (defined($dout));
 my $format= $opts{f};
 print "Copyright: Junpeng Rui, Lanzhou University. peter_rjp\@163.com\n";
+print "Please cite this article:\nRui J, Zhao Y, Cong N, Wang F, Li C, Liu X, Hu J, Ling N and Jing X (2023) Elevational distribution and seasonal dynamics of alpine soil prokaryotic communities. Front. Microbiol. 14:1280011. doi: 10.3389/fmicb.2023.1280011\n\n";
 die usage() unless ($opts{i});
 
 unless (-e $dout) {
@@ -37,7 +38,7 @@ unless ($suff) {
 	$suff=".fasta";
   }
 }
- 
+
 my @myfile;
 if ($inputs=~ /\*/) {  # wildcard mode
   @myfile = glob $inputs;
@@ -53,8 +54,9 @@ while(@myfile) {
 	my $input = shift(@myfile);
 	open MYIN, $input || die "Cannot open input file $input!\n";
 	my $prefix=basename $input;
-	$prefix=~ s/$suff$//i;
+$prefix=~ s/\.(fq|fastq|fasta|fa|fas)$//i;
 	open MYOUT, ">$dout/$prefix$suff" || die "Cannot open the output file.\n";
+	print "$input -> $dout/$prefix$suff\n";
  
 	my $n=0;
 	$n+=$begin;

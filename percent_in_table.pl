@@ -2,17 +2,22 @@
 
 sub Usage(){
 <<EOF
-This script is used to convert sequence-number table (e.g., an OTU table) to relative abundance table. 
+This script will convert sequence numbers in an ASV/OTU table into percentages (%).
+
+Note: Each column in the input table represents a sample, whereas each row represents a species (e.g., OTU/ASV). Additional columns in the input table, such as taxonomic infomation, are acceptable.
+
+Usage: perl percent_in_table.pl -i [input file] -n [number of samples]
 
 Parameters: 
--i input files (e.g., "otu*.txt" or otu_table.txt)
+-i the input file(s) (e.g., "otu*.txt" or otu_table.txt)
 -n number of samples (default value = column numbers - 1)
 	Note: you should use -n if the table includes extra columns such as taxonomy.
 -T total reads in each sample (optional)
--s suffix of output files (default "ab")
-	e.g, The name of output files will be "***_ab.txt" if using -s "ab"
--z remove a row if the sum value of the rows is zero (default 0):
+-s the suffix of output file(s) (default "ab")
+	e.g, The name of output file(s) will be "***_ab.txt" if using -s "ab"
+-z if the total value of the rows is zero, delete the row (default 0):
 	0 - no, 1 - yes
+
 EOF
 }
 
@@ -26,6 +31,7 @@ my $numT  = $opts{T};
 my $suffix= $opts{s}; $suffix="ab" unless(defined($suffix));
 my $rm0   = $opts{z};
 print "Copyright: Junpeng Rui, Lanzhou University. peter_rjp\@163.com\n";
+print "Please cite this article:\nRui J, Zhao Y, Cong N, Wang F, Li C, Liu X, Hu J, Ling N and Jing X (2023) Elevational distribution and seasonal dynamics of alpine soil prokaryotic communities. Front. Microbiol. 14:1280011. doi: 10.3389/fmicb.2023.1280011\n\n";
 die Usage() unless ($opts{i});
 
 my @sumT;

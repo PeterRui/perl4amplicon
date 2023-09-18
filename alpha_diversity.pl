@@ -2,8 +2,11 @@
 
 sub Usage(){
 <<EOF
-This script is used to calculate alpha diversity indices of each sample in a tab-deliminated text (e.g., an OTU table).
-Note: each column is a sample. Each row is a(n) OTU/gene. It's OK to keep extra columns (e.g., taxonomy) in the OTU table.
+Alpha diversity indices can be calculated with this script, such as Observed species, Chao1 richness, Shannon diversity, Simpson index, Pielou evenness, and Good's coverage. The input file is an ASV/OTU-table with sequence numbers.
+
+Note: Each column in the input table represents a sample, whereas each row represents a species (e.g., OTU/ASV). Additional columns in the input table, such as taxonomic infomation, are acceptable.
+
+Usage: perl alpha_diversity.pl -i otu_table_resample.txt -o alpha_div.txt -s 3
 
 Parameters: 
 -i the input file (default "otu_table_resample.txt")
@@ -11,13 +14,12 @@ Parameters:
 -s number of samples
 
 Example of the input file (otu_table_resample.txt):
-
-OTUID	Sample1	Sample2	Sample3	taxonomy
-OTU1	2011	2322	2231	Bacteria;Proteobacteria
-OTU2	1980	2210	1341	Bacteria;Acidobacteria
+SampleID	Sample1	Sample2	Sample3	taxonomy
+OTU_1001	20111	23222	22315	Bacteria;Proteobacteria
+OTU_1002	19802	22101	13418	Bacteria;Acidobacteria
 ...
 Note: taxonomy is an optional extra column.
-Usage: perl alpha_diversity.pl -i otu_table_resample.txt -o alpha_div.txt -s 3
+
 EOF
 }
 
@@ -28,6 +30,7 @@ my $input = $opts{i}; $input = "otu_table_resample.txt" unless (defined($input))
 my $out   = $opts{o}; $out = "alpha_div.txt" unless (defined($out));
 my $sam   = $opts{s};
 print "Copyright: Junpeng Rui, Lanzhou University. peter_rjp\@163.com\n";
+print "Please cite this article:\nRui J, Zhao Y, Cong N, Wang F, Li C, Liu X, Hu J, Ling N and Jing X (2023) Elevational distribution and seasonal dynamics of alpine soil prokaryotic communities. Front. Microbiol. 14:1280011. doi: 10.3389/fmicb.2023.1280011\n\n";
 die Usage() unless $opts{s};
 
 open TMP, $input || die "Cannot open the input file\n";

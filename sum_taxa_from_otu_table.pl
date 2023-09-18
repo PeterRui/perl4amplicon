@@ -2,18 +2,18 @@
 
 sub Usage(){
 <<EOF
-This script is used to summary taxa table at each rank based on OTU_ab table. 
-It is also suitable for hierarchical tables such as COG, subsystems and KO in MG-RAST.  
-Note: Different blank taxa will not be summed together.
+Based on an ASV/OTU-table, this script can calculate the total abundance of each taxon at each taxonomic rank.
+It is also appropriate for hierarchical tables like COG, subsystems, and KO in MG-RAST. 
+Note: Values from different unclassified taxa will not be added up.
 
 Parameters: 
 -i input files
 -o the output directory (default "taxa")
--s number_of_samples
--t number_of_taxa_rank (default 6)
+-s number of samples
+-t number of taxa rank (default 6)
 -D data type (default 0)
-	0 - percent; 1 - number of reads
--p prefix of output_file (default "taxa")
+	0 - percentage (%); 1 - number of reads
+-p the prefix of the output file (default "taxa")
 
 Example of the OTU table (named "otu_table_resample_ab.txt"):
 OTU_ID	Sam1	Sam2	Sam3	Domain	Phylum	Class	Order	Family	Genus
@@ -41,6 +41,7 @@ my $numT  = $opts{t}; $numT = 6 unless (defined($numT));
 my $dtype = $opts{D};
 my $pout  = $opts{p}; $pout="taxa" unless (defined($pout));
 print "Copyright: Junpeng Rui, Lanzhou University. peter_rjp\@163.com\n";
+print "Please cite this article:\nRui J, Zhao Y, Cong N, Wang F, Li C, Liu X, Hu J, Ling N and Jing X (2023) Elevational distribution and seasonal dynamics of alpine soil prokaryotic communities. Front. Microbiol. 14:1280011. doi: 10.3389/fmicb.2023.1280011\n\n";
 die Usage() unless ($opts{i} and $opts{s});
 
 my @myfile;
