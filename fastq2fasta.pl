@@ -3,7 +3,7 @@ print "Copyright: Junpeng Rui, Lanzhou University. peter_rjp\@163.com\n";
 print "Please cite this article:\nRui J, Zhao Y, Cong N, Wang F, Li C, Liu X, Hu J, Ling N and Jing X (2023) Elevational distribution and seasonal dynamics of alpine soil prokaryotic communities. Front. Microbiol. 14:1280011. doi: 10.3389/fmicb.2023.1280011\n\n";
 print "This script is used to convert fastq-format reads to fasta-format reads.\n";
 
-die "Usage:perl fastq2fasta.pl [the input file]\n" unless @ARGV>0;
+die "Usage: perl fastq2fasta.pl [the input file]\n" unless @ARGV>0;
 
 my $fastq_file = $ARGV[0];
 my $fasta_file = $fastq_file;
