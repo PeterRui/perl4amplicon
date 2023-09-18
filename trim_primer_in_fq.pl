@@ -21,7 +21,7 @@ Parameters:
 	0 - No;
 	1 - Yes.
 
-Example of the text file including 2 primers:
+Example of the tab-delimited text file including 2 rows (i.e., 2 primers):
 GMRCCIGGIGTIGGYTGYGC	nifH-2F
 TTGTTGGCIGCRTASAKIGCCAT	nifH-3R
 

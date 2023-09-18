@@ -19,7 +19,7 @@ Usage: perl trim_primer_in_fq.pl -i [fastq files] -l [the primer list] -d [the o
 
 If you use -i “fq/*.fastq”, it means all fastq files in the input directory “fq”.
 
-Example of the text file including 2 primers:
+Example of the tab-delimited text file including 2 rows (i.e., 2 primers):
 
 GMRCCIGGIGTIGGYTGYGC	nifH-2F
 
