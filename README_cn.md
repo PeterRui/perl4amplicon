@@ -66,7 +66,8 @@ MG-RAST分级的的COG、Subsystems、KO功能表也可以作为输入文件，�
 
 6. rename_seqid_for_usearch.pl
      
-该脚本用于fasta/fastq格式序列的重命名，ID重命名为"文件名_编号"（可被Qiime识别），在ID后面加上";barcodelabel=文件名;"(可被USEARCH识别）. 
+该脚本用于fasta/fastq格式序列的重命名，ID重命名为"文件名_编号;barcodelabel=文件名;"。
+来自不同样本的序列可合并到一个文件中进行分析（例如OTU聚类），Qiime和Usearch软件可识别序列的样本来源。
 
 例如，文件"S1.fasta"的第一条序列重命名为"S1_1;barcodelabel=S1;"，第二条序列重命名为"S1_2;barcodelabel=S1;"。
 
