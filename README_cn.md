@@ -12,7 +12,7 @@ Rui J, Zhao Y, Cong N, Wang F, Li C, Liu X, Hu J, Ling N and Jing X (2023) Eleva
 
 [多余的碱基][前引物][目的序列][后引物][多余的碱基]
 
-用法: perl trim_primer_in_fq.pl -i [若干fastq文件] -l [引物列表文件] -d [输出目录] <可选参数>
+用法: perl trim_primer_in_fq.pl -i [fastq文件] -l [引物列表文件] -d [输出目录] <可选参数>
 
 -i的值可以是单个文件，也可以是若干文件，例如-i “fq/_*.fastq”表示fq目录下的所有扩展名为fastq的文件，使用通配符_*时请务必使用英文引号。
 
@@ -70,11 +70,11 @@ MG-RAST分级的的COG、Subsystems、KO功能表也可以作为输入文件，�
 
 例如，文件"S1.fasta"的第一条序列重命名为"S1_1;barcodelabel=S1;"，第二条序列重命名为"S1_2;barcodelabel=S1;"。
 
-用法: perl rename_seqid_for_usearch.pl -i [若干输入文件] -f [输入文件格式] <可选参数>
+用法: perl rename_seqid_for_usearch.pl -i [输入文件] -f [输入文件格式] <可选参数>
 
--i: 如有多个文件，可以使用通配符_*，或英文分号隔开（例如"1.fq;2.fq;3.fq"），请务必使用英文引号！
+-i: 如有多个文件，可以使用通配符*（例如"*.fq"），或多个文件之间以英文分号隔开（例如"1.fq;2.fq;3.fq"），请务必使用英文引号！
 
--f: 0 - fasta, 1 - fastq
+-f: 输入文件的格式，0 - fasta，1 - fastq
 
 
 7. fastq2fasta.pl
